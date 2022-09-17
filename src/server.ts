@@ -1,94 +1,37 @@
-const { Builder, By, Key, until } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
+import axios from 'axios';
 
-// const url = 'https://www.courtauction.go.kr/'
-
-const run = async () => {
-  // // headless로 크롬 드라이버 실행
-  let driver = await new Builder()
-    .forBrowser('chrome')
-    .setChromeOptions(
-      new chrome.Options().headless().addArguments('--disable-gpu', 'window-size=1920x1080', 'lang=ko_KR'),
-    )
-    .build();
-
-  try {
-    // 네이버 실행
-    await driver.get('https://www.courtauction.go.kr/');
-    console.log('11111111111111111111111');
-
-    // Javascript를 실행하여 UserAgent를 확인한다.
-    const userAgent = await driver.executeScript('return navigator.userAgent;');
-
-    console.log('UserAgent: ', userAgent);
-
-    // 네이버 검색창의 id는 query이다. By.id로 #query Element를 얻어온다.
-    let searchInput = await driver.findElement(By.css('jiwonNm1'));
-    console.log('2222222222222222222');
-    console.log('searchInput: ', searchInput);
-
-    // 검색창에 '회 숙성하는 법'을 치고 엔터키를 누른다.
-    let value = '대구지방법원';
-    searchInput.sendKeys(value, Key.ENTER);
-
-    // css selector로 가져온 element가 위치할때까지 최대 10초간 기다린다.
-    await driver.wait(until.elementLocated(By.css('#header_wrap')), 1000);
-
-    // total_tit라는 클래스 명을 가진 element들을 받아온다.
-    let resultElements = await driver.findElements(By.className('total_tit'));
-    console.log('[resultElements.length]', resultElements.length);
-
-    // 검색 결과의 text를 가져와서 콘솔에 출력한다.
-    console.log('== Search results ==');
-    for (var i = 0; i < resultElements.length; i++) {
-      console.log('- ' + (await resultElements[i].getText()));
-    }
-
-    // try {
-    //   // 네이버 실행
-    //   await driver.get('https://www.naver.com/');
-
-    //   // Javascript를 실행하여 UserAgent를 확인한다.
-    //   const userAgent = await driver.executeScript('return navigator.userAgent;');
-
-    //   console.log('[UserAgent]', userAgent);
-
-    //   // 네이버 검색창의 id는 query이다. By.id로 #query Element를 얻어온다.
-    //   let searchInput = await driver.findElement(By.id('query'));
-    //   console.log('searchInput: ', searchInput);
-
-    //   // 검색창에 '회 숙성하는 법'을 치고 엔터키를 누른다.
-    //   let keyword = '회 숙성하는 법';
-    //   searchInput.sendKeys(keyword, Key.ENTER);
-
-    //   // css selector로 가져온 element가 위치할때까지 최대 10초간 기다린다.
-    //   await driver.wait(until.elementLocated(By.css('#header_wrap')), 1000);
-
-    //   // total_tit라는 클래스 명을 가진 element들을 받아온다.
-    //   let resultElements = await driver.findElements(By.className('total_tit'));
-    //   console.log('[resultElements.length]', resultElements.length);
-
-    //   // 검색 결과의 text를 가져와서 콘솔에 출력한다.
-    //   console.log('== Search results ==');
-    //   for (var i = 0; i < resultElements.length; i++) {
-    //     console.log('- ' + (await resultElements[i].getText()));
-    //   }
-
-    //   // 검색결과의 첫번째 링크를 클릭한다.
-    //   if (resultElements.length > 0) {
-    //     await resultElements[0].click();
-    //   }
-
-    // 4초를 기다린다.
-    try {
-      await driver.wait(() => {
-        return false;
-      }, 4000);
-    } catch (err) {}
-  } finally {
-    // 종료한다.
-    driver.quit();
-  }
-};
-
-run();
+axios
+  .post(
+    'https://www.courtauction.go.kr/RetrieveRealEstMulDetailList.laf',
+    'bubwLocGubun=1&jiwonNm=%BC%AD%BF%EF%C1%DF%BE%D3%C1%F6%B9%E6%B9%FD%BF%F8&jpDeptCd=000000&daepyoSidoCd=&daepyoSiguCd=&daepyoDongCd=&notifyLoc=on&rd1Cd=&rd2Cd=&realVowel=35207_45207&rd3Rd4Cd=&notifyRealRoad=on&saYear=2022&saSer=&ipchalGbncd=000331&termStartDt=2022.09.17&termEndDt=2022.10.01&lclsUtilCd=&mclsUtilCd=&sclsUtilCd=&gamEvalAmtGuganMin=&gamEvalAmtGuganMax=&notifyMinMgakPrcMin=&notifyMinMgakPrcMax=&areaGuganMin=&areaGuganMax=&yuchalCntGuganMin=&yuchalCntGuganMax=&notifyMinMgakPrcRateMin=&notifyMinMgakPrcRateMax=&srchJogKindcd=&mvRealGbncd=00031R&srnID=PNO102001&_NAVI_CMD=&_NAVI_SRNID=&_SRCH_SRNID=PNO102001&_CUR_CMD=InitMulSrch.laf&_CUR_SRNID=PNO102001&_NEXT_CMD=RetrieveRealEstMulDetailList.laf&_NEXT_SRNID=PNO102002&_PRE_SRNID=&_LOGOUT_CHK=&_FORM_YN=Y',
+    {
+      headers: {
+        Accept:
+          'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+        'Accept-Language': 'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+        'Cache-Control': 'max-age=0',
+        Connection: 'keep-alive',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Cookie:
+          'WMONID=D7IubHhBxjU; daepyoSidoCd=; daepyoSiguCd=; mvmPlaceSidoCd=; mvmPlaceSiguCd=; rd1Cd=; rd2Cd=; realVowel=35207_45207; roadPlaceSidoCd=; roadPlaceSiguCd=; vowelSel=35207_45207; realJiwonNm=%BC%AD%BF%EF%C1%DF%BE%D3%C1%F6%B9%E6%B9%FD%BF%F8; JSESSIONID=Ld9LcQP56aczchoLzc9AMKL2MuVc6eAYn3EaNWbvubb1tQOabZwf7f27IEs1AyuA.amV1c19kb21haW4vYWlzMQ==',
+        Origin: 'https://www.courtauction.go.kr',
+        Referer: 'https://www.courtauction.go.kr/InitMulSrch.laf',
+        'Sec-Fetch-Dest': 'frame',
+        'Sec-Fetch-Mode': 'navigate',
+        'Sec-Fetch-Site': 'same-origin',
+        'Sec-Fetch-User': '?1',
+        'Upgrade-Insecure-Requests': '1',
+        'User-Agent':
+          'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
+        'sec-ch-ua': '"Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"macOS"',
+      },
+    },
+  )
+  .then((res) => {
+    console.log('res.data: ', res.data);
+  })
+  .catch((err) => {
+    console.log('err: ', err);
+  });
