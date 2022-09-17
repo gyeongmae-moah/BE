@@ -1,5 +1,4 @@
-from urllib import request
-
+import requests
 
 cookies = {
     'WMONID': 'D7IubHhBxjU',
@@ -40,6 +39,6 @@ headers = {
 
 data = 'bubwLocGubun=1&jiwonNm=%BC%AD%BF%EF%C1%DF%BE%D3%C1%F6%B9%E6%B9%FD%BF%F8&jpDeptCd=000000&daepyoSidoCd=&daepyoSiguCd=&daepyoDongCd=&notifyLoc=on&rd1Cd=&rd2Cd=&realVowel=35207_45207&rd3Rd4Cd=&notifyRealRoad=on&saYear=2022&saSer=&ipchalGbncd=000331&termStartDt=2022.09.17&termEndDt=2022.10.01&lclsUtilCd=&mclsUtilCd=&sclsUtilCd=&gamEvalAmtGuganMin=&gamEvalAmtGuganMax=&notifyMinMgakPrcMin=&notifyMinMgakPrcMax=&areaGuganMin=&areaGuganMax=&yuchalCntGuganMin=&yuchalCntGuganMax=&notifyMinMgakPrcRateMin=&notifyMinMgakPrcRateMax=&srchJogKindcd=&mvRealGbncd=00031R&srnID=PNO102001&_NAVI_CMD=&_NAVI_SRNID=&_SRCH_SRNID=PNO102001&_CUR_CMD=InitMulSrch.laf&_CUR_SRNID=PNO102001&_NEXT_CMD=RetrieveRealEstMulDetailList.laf&_NEXT_SRNID=PNO102002&_PRE_SRNID=&_LOGOUT_CHK=&_FORM_YN=Y'
 
-response = request.post('https://www.courtauction.go.kr/RetrieveRealEstMulDetailList.laf', cookies=cookies, headers=headers, data=data)
+response = requests.post('https://www.courtauction.go.kr/RetrieveRealEstMulDetailList.laf', cookies=cookies, headers=headers, data=data)
 
 print(response.text)
