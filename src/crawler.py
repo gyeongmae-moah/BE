@@ -46,21 +46,5 @@ data = 'srnID=PNO102000&jiwonNm=%B4%EB%B1%B8%C1%F6%B9%E6%B9%FD%BF%F8&bubwLocGubu
 response = requests.post('https://www.courtauction.go.kr/RetrieveRealEstMulDetailList.laf', cookies=cookies, headers=headers, data=data)
 response.raise_for_status()
 soup = bs(response.text, "lxml")
-# print('soup: ', soup.find(attrs={'class':'Ltbl_list_lvl0'}))
 var1 = soup.find('tbody')
 print('result:', var1.td.input['value'].split(',')[0])
-# print('soup: ', soup)
-# elements = soup.select('tbody tr td')
-# elements = soup.select('/html/body/div/div[1]/div[4]/div[3]/div[2]/div[1]/form/div/ul[1]/li[2]/select[1]')
-# elements = soup.select('ul li select option')
-# //*[@id="idJiwonNm1"]
-# /html/body/div/div[1]/div[4]/div[3]/div[2]/div[1]/form/div/ul[1]/li[2]/select[1]
-# /html/body/div[1]/div[4]/div[3]/div[4]/form[1]/table/tbody/tr[1]
-# (//*[@id="contents"]/div[4]/form[1]/table/tbody/tr[1]
-
-# elements = soup.select('tbody tr td')
-# print('elements: ', elements)
-
-# for index, element in enumerate(elements, 1):
-#     if element.text == re.compile("^대구"):
-#         print("{}번째 정보: {}".format(index, element.text))
