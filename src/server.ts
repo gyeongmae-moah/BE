@@ -28,7 +28,12 @@ const options = {
 //   }),
 // );
 
-// app.use('/', subs_router);
+app.get('/', (res: Response) => {
+  res.status(400).send(alert('올바르지 않은 접근입니다.'));
+  history.back();
+});
+
+app.use('/api', subs_router);
 
 https.createServer(options, app).listen(port, () => {
   console.log(`

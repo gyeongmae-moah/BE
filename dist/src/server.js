@@ -49,7 +49,11 @@ const options = {
 //     origin: 'http://localhost:3000',
 //   }),
 // );
-app.use('/', subs_1.default);
+app.get('/', (res) => {
+    res.status(400).send(alert('올바르지 않은 접근입니다.'));
+    history.back();
+});
+app.use('/api', subs_1.default);
 https_1.default.createServer(options, app).listen(port, () => {
     console.log(`
   ################################################
