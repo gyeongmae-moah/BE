@@ -46,6 +46,7 @@ const register = (req: Request, res: Response) => {
     return res.status(400).json({
       result: false,
       err_code: 400,
+      detail: '캐치 에러',
     });
   }
 };

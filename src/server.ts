@@ -32,11 +32,11 @@ app.use(
   }),
 );
 
-// app.use(
-//   cors({
-//     origin: 'http://localhost:3000',
-//   }),
-// );
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+  }),
+);
 
 app.get('/', (req: Request, res: Response) => {
   return res.status(400).send('<script>alert("올바르지 않은 접근입니다.")</script>');

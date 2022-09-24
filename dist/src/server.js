@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const cors_1 = __importDefault(require("cors"));
 const subs_1 = __importDefault(require("./routes/subs"));
 const DBindex_1 = __importDefault(require("./DBindex"));
 const https_1 = __importDefault(require("https"));
@@ -28,11 +29,9 @@ app.use((0, express_rate_limit_1.default)({
     windowMs: 1 * 60 * 1000,
     max: 100,
 }));
-// app.use(
-//   cors({
-//     origin: 'http://localhost:3000',
-//   }),
-// );
+app.use((0, cors_1.default)({
+    origin: 'http://localhost:3000',
+}));
 app.get('/', (req, res) => {
     return res.status(400).send('<script>alert("올바르지 않은 접근입니다.")</script>');
 });
