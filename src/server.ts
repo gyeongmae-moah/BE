@@ -1,5 +1,5 @@
 require('dotenv').config();
-import express from 'express';
+import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import subs_router from './routes/subs';
@@ -28,7 +28,7 @@ const options = {
 //   }),
 // );
 
-app.use('/api', subs_router);
+app.use('/', subs_router);
 
 https.createServer(options, app).listen(port, () => {
   console.log(`

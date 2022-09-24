@@ -49,7 +49,7 @@ const options = {
 //     origin: 'http://localhost:3000',
 //   }),
 // );
-app.use('/api', subs_1.default);
+app.use('/', subs_1.default);
 https_1.default.createServer(options, app).listen(port, () => {
     console.log(`
   ################################################
