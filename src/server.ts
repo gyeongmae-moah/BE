@@ -29,9 +29,8 @@ const options = {
 // );
 
 app.get('/', (req: Request, res: Response) => {
-  res.send("<script>alert('올바르지 않은 접근입니다.')</script>");
-  console.log('아래 코드 실행');
-  history.back();
+  res.send('<script>alert("올바르지 않은 접근입니다.")</script>');
+  res.redirect('https://www.gmmoa.com');
 });
 
 app.use('/api', subs_router);
