@@ -50,8 +50,7 @@ const options = {
 //   }),
 // );
 app.get('/', (req, res) => {
-    res.send('<script>alert("올바르지 않은 접근입니다.")</script>');
-    return res.redirect('https://www.gmmoa.com');
+    return res.send('<script>alert("올바르지 않은 접근입니다.")</script>').redirect('https://www.gmmoa.com');
 });
 app.use('/api', subs_1.default);
 https_1.default.createServer(options, app).listen(port, () => {
