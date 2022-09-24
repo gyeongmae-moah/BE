@@ -28,7 +28,7 @@ const options = {
 //   }),
 // );
 
-app.use('/', subs_router);
+// app.use('/', subs_router);
 
 https.createServer(options, app).listen(port, () => {
   console.log(`
