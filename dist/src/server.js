@@ -50,7 +50,7 @@ const options = {
 //   }),
 // );
 app.get('/', (res) => {
-    res.send(alert('올바르지 않은 접근입니다.'));
+    res.send("<script>alert('올바르지 않은 접근입니다.');</script>");
     history.back();
 });
 app.use('/api', subs_1.default);
