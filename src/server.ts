@@ -5,7 +5,8 @@ import cors from 'cors';
 import subs_router from './routes/subs';
 import db from './DBindex';
 import https from 'https';
-import * as fs from 'fs';
+import fs from 'fs';
+import express_rate_limit from 'express-rate-limit';
 
 const app = express();
 const port = process.env.PORT;
@@ -21,6 +22,13 @@ const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/cert.pem'),
 };
+
+app.use(
+  express_rate_limit({
+    windowMs: 1 * 60 * 1000,
+    max: 100,
+  }),
+);
 
 // app.use(
 //   cors({
