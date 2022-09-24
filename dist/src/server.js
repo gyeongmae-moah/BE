@@ -53,7 +53,7 @@ https_1.default.createServer(options, app).listen(port);
 app.use('/api', subs_1.default);
 console.log(`
   ################################################
-  🛡️  Server listening...
+    서버 연결 성공 !
   ################################################
 `);
 //# sourceMappingURL=server.js.map
