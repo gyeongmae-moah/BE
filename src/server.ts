@@ -7,12 +7,14 @@ import db from './DBindex';
 import https from 'https';
 import fs from 'fs';
 import express_rate_limit from 'express-rate-limit';
+import helmet from 'helmet';
 
 const app = express();
 const port = process.env.PORT;
 
 db.connect();
 
+app.use(helmet());
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
