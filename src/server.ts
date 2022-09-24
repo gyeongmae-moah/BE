@@ -5,7 +5,7 @@ import cors from 'cors';
 import subs_router from './routes/subs';
 import db from './DBindex';
 import https from 'https';
-import fs from 'fs';
+import * as fs from 'fs';
 
 const app = express();
 const port = process.env.PORT;
