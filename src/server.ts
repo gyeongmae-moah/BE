@@ -4,14 +4,24 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 import subs_router from './routes/subs';
 import db from './DBindex';
+import https from 'https';
+import fs from 'fs';
 
 const app = express();
+const port = process.env.PORT;
 
 db.connect();
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const options = {
+  ca: fs.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/fullchain.pem'),
+  key: fs.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/cert.pem'),
+};
+https.createServer(options, app).listen(port);
 
 // app.use(
 //   cors({
@@ -21,12 +31,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/api', subs_router);
 
-const port = process.env.PORT;
-
-app.listen(port, () => {
-  console.log(`
+console.log(`
   ################################################
   🛡️  Server listening...
   ################################################
 `);
-});
