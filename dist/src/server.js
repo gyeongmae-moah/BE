@@ -6,16 +6,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
-const cors_1 = __importDefault(require("cors"));
 const subs_1 = __importDefault(require("./routes/subs"));
 const DBindex_1 = __importDefault(require("./DBindex"));
 const app = (0, express_1.default)();
 DBindex_1.default.connect();
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-app.use((0, cors_1.default)({
-    origin: 'http://localhost:3000',
-}));
+// app.use(
+//   cors({
+//     origin: 'http://localhost:3000',
+//   }),
+// );
 app.use('/api', subs_1.default);
 const port = process.env.PORT;
 app.listen(port, () => {
