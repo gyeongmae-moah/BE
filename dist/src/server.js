@@ -44,16 +44,17 @@ const options = {
     key: fs.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/privkey.pem'),
     cert: fs.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/cert.pem'),
 };
-https_1.default.createServer(options, app).listen(port);
 // app.use(
 //   cors({
 //     origin: 'http://localhost:3000',
 //   }),
 // );
 app.use('/api', subs_1.default);
-console.log(`
+https_1.default.createServer(options, app).listen(port, () => {
+    console.log(`
   ################################################
     서버 연결 성공 !
   ################################################
 `);
+});
 //# sourceMappingURL=server.js.map

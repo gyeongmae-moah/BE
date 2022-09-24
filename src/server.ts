@@ -21,7 +21,6 @@ const options = {
   key: fs.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/cert.pem'),
 };
-https.createServer(options, app).listen(port);
 
 // app.use(
 //   cors({
@@ -31,8 +30,10 @@ https.createServer(options, app).listen(port);
 
 app.use('/api', subs_router);
 
-console.log(`
+https.createServer(options, app).listen(port, () => {
+  console.log(`
   ################################################
     서버 연결 성공 !
   ################################################
 `);
+});
