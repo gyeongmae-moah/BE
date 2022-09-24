@@ -51,7 +51,7 @@ const options = {
 // );
 app.get('/', (req, res) => {
     res.send("<script>alert('올바르지 않은 접근입니다.')</script>");
-    // res.write('<script>window.location="https://"</script>');
+    console.log('아래 코드 실행');
     history.back();
 });
 app.use('/api', subs_1.default);
