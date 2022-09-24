@@ -29,7 +29,7 @@ const options = {
 // );
 
 app.get('/', (req: Request, res: Response) => {
-  return res.send('<script>alert("올바르지 않은 접근입니다.")</script>').redirect('https://www.gmmoa.com');
+  return res.send('<script>alert("올바르지 않은 접근입니다.")</script>');
 });
 
 app.use('/api', subs_router);
