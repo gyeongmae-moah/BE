@@ -8,6 +8,7 @@ import https from 'https';
 import fs from 'fs';
 import express_rate_limit from 'express-rate-limit';
 import helmet from 'helmet';
+import csp from 'helmet-csp';
 
 const app = express();
 const port = process.env.PORT;
@@ -18,6 +19,13 @@ app.use(helmet());
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(
+//   csp({
+//     directives: {
+//       scriptSrc: ["'self'", 'gmmoa.com'],
+//     },
+//   }),
+// );
 
 const options = {
   ca: fs.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/fullchain.pem'),
@@ -39,7 +47,7 @@ app.use(
 );
 
 app.get('/', (req: Request, res: Response) => {
-  return res.status(400).send('<script>alert("올바르지 않은 접근입니다.")</script>');
+  return res.status(200).send('<script unsafe-inline>alert("올바르지 않은 접근입니다.")</script>');
 });
 
 app.use('/api', subs_router);
