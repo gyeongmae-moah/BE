@@ -20,13 +20,6 @@ app.use((0, helmet_1.default)());
 app.use(express_1.default.static('public'));
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-// app.use(
-//   csp({
-//     directives: {
-//       scriptSrc: ["'self'", 'gmmoa.com'],
-//     },
-//   }),
-// );
 const options = {
     ca: fs_1.default.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/fullchain.pem'),
     key: fs_1.default.readFileSync('/etc/letsencrypt/live/api.gmmoa.com/privkey.pem'),
@@ -37,11 +30,8 @@ app.use((0, express_rate_limit_1.default)({
     max: 100,
 }));
 app.use((0, cors_1.default)({
-    origin: 'http://localhost:3000',
+    origin: 'https://gmmoa.com',
 }));
-app.get('/', (req, res) => {
-    return res.status(200).send('<script unsafe-inline>alert("올바르지 않은 접근입니다.")</script>');
-});
 app.use('/api', subs_1.default);
 https_1.default.createServer(options, app).listen(port, () => {
     console.log(`
