@@ -1,5 +1,5 @@
 require('dotenv').config();
-import express from 'express';
+import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import subs_router from './routes/subs';
@@ -37,6 +37,10 @@ app.use(
     origin: 'https://gmmoa.com',
   }),
 );
+
+app.get('/', (req: Request, res: Response) => {
+  return res.status(400).send('<script>alert("올바르지 않은 접근입니다.")</script>');
+});
 
 app.use('/api', subs_router);
 
