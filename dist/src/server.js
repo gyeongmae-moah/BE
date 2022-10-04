@@ -32,6 +32,9 @@ app.use((0, express_rate_limit_1.default)({
 app.use((0, cors_1.default)({
     origin: 'https://gmmoa.com',
 }));
+app.get('/', (req, res) => {
+    return res.status(400).send('<script>alert("올바르지 않은 접근입니다.")</script>');
+});
 app.use('/api', subs_1.default);
 https_1.default.createServer(options, app).listen(port, () => {
     console.log(`
