@@ -11,10 +11,8 @@ options.add_argument("disable-gpu")
 
 client = pymongo.MongoClient("mongodb://localhost:27017")
 db = client["gmmoa"]
-collection = db["items"]
-today = '2022.10.18'
-count = 0
-
+collection = db["2022-10-07"]
+today = '2022.10.21'
 
 def no_space(text):
     text1 = re.sub('&nbsp; | &nbsp;| \n|\t|\r', '', text)
@@ -24,8 +22,6 @@ def no_space(text):
 for court in range(1, 61):
     maintain = True
     browser = webdriver.Chrome(executable_path='/Users/nagitak/Desktop/gmmoa_back/chromedriver', chrome_options=options)
-    count +=1
-    print('법원 수: ', count)
     browser.get('https://www.courtauction.go.kr/')
     browser.switch_to.frame(browser.find_element(By.NAME, 'indexFrame'))
     browser.find_element(By.XPATH, f'//*[@id="idJiwonNm1"]/option[{court}]').click() # 법원별 순환
