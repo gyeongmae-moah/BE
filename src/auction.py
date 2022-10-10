@@ -11,8 +11,8 @@ options.add_argument("disable-gpu")
 
 client = pymongo.MongoClient("mongodb://localhost:27017")
 db = client["gmmoa"]
-collection = db["2022-10-07"]
-today = '2022.10.21'
+collection = db["2022-10-10"]
+today = '2022.10.24'
 
 def no_space(text):
     text1 = re.sub('&nbsp; | &nbsp;| \n|\t|\r', '', text)
@@ -53,8 +53,9 @@ for court in range(1, 61):
                     maintain = False
                     break
                 status = no_space(item[i].find_all('td')[6].text).split()[1]
-
-                mydict = { "court": court, "name": name, "purpose": purpose, "location": location, "count": count, "value": value, "minimum_cost": minimum_cost, "date": date, "status": status}
+                if count > 0:
+                    location = f'{location} 외 {count}건'
+                mydict = { "court": court, "name": name, "purpose": purpose, "location": location, "value": value, "minimum_cost": minimum_cost, "status": status}
                 collection.insert_one(mydict)
 
             try:
