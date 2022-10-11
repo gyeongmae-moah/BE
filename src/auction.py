@@ -11,8 +11,8 @@ options.add_argument("disable-gpu")
 
 client = pymongo.MongoClient("mongodb://localhost:27017")
 db = client["gmmoa"]
-collection = db["2022-10-11"]
-today = '2022.10.25'
+collection = db["2022-10-12"]
+today = '2022.10.26'
 
 def no_space(text):
     text1 = re.sub('&nbsp; | &nbsp;| \n|\t|\r', '', text)
