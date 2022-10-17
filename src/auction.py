@@ -11,9 +11,9 @@ options.add_argument("disable-gpu")
 
 client = pymongo.MongoClient("mongodb://localhost:27017")
 db = client["gmmoa"]
-# collection = db["2022-10-14"]
-collection = db["test"]
-today = '2022.10.28'
+collection = db["2022-10-17"]
+# collection = db["test"]
+today = '2022.10.31'
 
 def no_space(text):
     text1 = re.sub('&nbsp; | &nbsp;| \n|\t|\r', '', text)
@@ -21,7 +21,7 @@ def no_space(text):
     return text2
 
 for court in range(1, 61):
-    print('법원 순환')
+    # print('법원 순환')
     maintain = True
     browser = webdriver.Chrome(executable_path='/Users/nagitak/Desktop/gmmoa_back/chromedriver', chrome_options=options)
     browser.get('https://www.courtauction.go.kr/')
@@ -36,7 +36,7 @@ for court in range(1, 61):
     for page in range(1, 100): # 페이지 순환
         if maintain == False:
             break
-        print('페이지 순환')
+        # print('페이지 순환')
         soup = BeautifulSoup(browser.page_source, 'lxml') # html parsing
         item = soup.find_all('tr', attrs={'class':['Ltbl_list_lvl1', 'Ltbl_list_lvl0']}) # 스크래핑 할 element class 지정
         # if no_space(item[0].find_all('td')[1].text).split()[0] == '거창지원':
@@ -54,11 +54,11 @@ for court in range(1, 61):
             minimum_cost = item[i].find_all('td')[5].text.split()[1] # 최소매각가격
             date = item[i].find_all('td')[6].text.split()[1] # 매각기일
             if str(date) != today: # 원하는 매각기일이 아닐 경우 중지
-                print('원하는 매각기일 아님')
+                # print('원하는 매각기일 아님')
                 maintain = False
                 break
             status = no_space(item[i].find_all('td')[6].text).split()[1] # 상태
-            print(f'status:{status}') # '원하는 매각이일 아님 나오고는 나오면 안됨
+            # print(f'status:{status}') # '원하는 매각이일 아님 나오고는 나오면 안됨
             if count > 0:
                 location = f'{location} 외 {count}건'
             mydict = { "court": court, "name": name, "purpose": purpose, "location": location, "value": value, "minimum_cost": minimum_cost, "status": status}
