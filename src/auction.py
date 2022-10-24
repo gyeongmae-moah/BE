@@ -11,7 +11,7 @@ options.add_argument("disable-gpu")
 
 client = pymongo.MongoClient("mongodb://localhost:27017")
 db = client["gmmoa"]
-collection = db["2022-10-24"]
+collection = db["2022-10-25"]
 # collection = db["test"]
 today = '2022.11.08'
 
